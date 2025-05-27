@@ -16,13 +16,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-def create_admin(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'shuriken.kai@gmail.com', 'Vinifera1234')
-        return HttpResponse("Admin user created!")
-    else:
-        return HttpResponse("Admin user already exists.")
-
 
 class WinesView(LoginRequiredMixin, generic.ListView):
     model = Wine
