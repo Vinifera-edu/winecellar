@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import create_admin
 
 # App Namespace for app 'wine'
 app_name = 'wine'
