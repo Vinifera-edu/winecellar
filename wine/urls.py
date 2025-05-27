@@ -20,8 +20,6 @@ urlpatterns = [
     path('wine/log/', views.WineLog.as_view(), name='wine_log'),
     path('wine/detail/<int:pk>', views.WineLogDetail, name='wine_log_detail'),
 
-    # tymczasowa ścieżka do tworzenia admina
-    path('create-admin/', create_admin),
     
     # path('charts/', views.EditorChartView.as_view(), name='charts')
 ]
