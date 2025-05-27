@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import create_admin
 
 # App Namespace for app 'wine'
 app_name = 'wine'
@@ -18,13 +19,7 @@ urlpatterns = [
     path('wine/full/', views.FullView.as_view(), name='wine_fullview'),
     path('wine/log/', views.WineLog.as_view(), name='wine_log'),
     path('wine/detail/<int:pk>', views.WineLogDetail, name='wine_log_detail'),
-
-from .views import create_admin
-
-urlpatterns += [
     path('create-admin/', create_admin),
-]
-
     
     # path('charts/', views.EditorChartView.as_view(), name='charts')
 ]
