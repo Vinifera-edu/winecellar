@@ -1,14 +1,24 @@
-{% extends "./base.html" %}
+{% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <h4>Analyze Wine Label</h4>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="wine_image">Upload wine label image:</label>
-      <input type="file" class="form-control" name="wine_image" accept="image/*" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Analyze</button>
-  </form>
+<div class="container mt-4">
+    <h2>Dodaj wino ze zdjęcia</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="wine_image" class="form-label">Wybierz zdjęcie butelki (etykieta)</label>
+            <input type="file" name="wine_image" accept="image/*" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Prześlij i przeanalizuj</button>
+    </form>
+
+    {% if ai_result %}
+    <hr>
+    <h4>Wynik analizy etykiety</h4>
+    <pre class="bg-light p-3 rounded border">{{ ai_result }}</pre>
+
+    <form method="GET" action="{% url 'wine:create_wine' %}">
+        <button class="btn btn-success">Użyj tych danych w formularzu</button>
+    </form>
+    {% endif %}
 </div>
 {% endblock %}
