@@ -70,6 +70,9 @@
       </tbody>
     </table>
   </div>
+{% if wine.wine_image %}
+  <img src="{{ wine.wine_image.url }}" alt="Bottle" width="60">
+{% endif %}
 
   {% for wine in object_list %}
   <!-- Modal -->
