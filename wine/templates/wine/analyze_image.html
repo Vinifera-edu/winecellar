@@ -1,0 +1,14 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+  <h4>Analyze Wine Label</h4>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="wine_image">Upload wine label image:</label>
+      <input type="file" class="form-control" name="wine_image" accept="image/*" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Analyze</button>
+  </form>
+</div>
+{% endblock %}
