@@ -107,3 +107,9 @@ class WineForm(ModelForm):
             'warehouse': forms.TextInput(attrs={'class': "form-control"}),
             'nmbrbottles': forms.NumberInput(attrs={'class': "form-range", 'type': 'range', 'min': '0', 'max': '18'}),
         }
+fields = ['winename', ..., 'nmbrbottles', 'wine_image']
+
+widgets = {
+    # ... inne
+    'wine_image': forms.FileInput(attrs={'class': "form-control"}),
+}
