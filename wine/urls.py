@@ -2,6 +2,16 @@ from django.urls import path
 from . import views
 from .views import create_admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... Twoje ścieżki
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 # App Namespace for app 'wine'
 app_name = 'wine'
 
