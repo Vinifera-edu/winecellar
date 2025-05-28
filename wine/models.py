@@ -74,7 +74,7 @@ class WineForm(ModelForm):
         'country': 'Country',
         'region': 'Region',
         'purchase': 'Purchase date',
-        'price': 'Price (~CHF)',
+        'price': 'Price (~EUR)',
         'dealer': 'Merchant',
         'drinkfrom': 'Drinkable from',
         'drinkto': 'Drinkable until',
