@@ -185,3 +185,32 @@ def export_xls(request):
 
     wb.save(response)
     return response
+
+from django.shortcuts import render, redirect
+from .forms import WineForm
+from .models import Wine
+import openai
+import base64
+
+def analyze_wine_image(request):
+    if request.method == 'POST' and request.FILES.get('wine_image'):
+        image_file = request.FILES['wine_image']
+        # Zakoduj obraz do base64
+        image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
+        response = openai.ChatCompletion.create(
+            model="gpt-4-vision-preview",
+            messages=[
+                {"role": "user", "content": [
+                    {"type": "text", "text": "Describe this wine label and extract the wine name, producer, country, region, grape type, and year."},
+                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_b64}"}}
+                ]}
+            ],
+            max_tokens=1000
+        )
+        # Przykład parsowania wyniku
+        text = response.choices[0].message['content']
+
+        # TODO: zapisz w sesji i przekaż do formularza
+        request.session['ai_wine_data'] = text
+        return redirect('wine:create_wine')
+    return render(request, 'wine/analyze_image.html')
