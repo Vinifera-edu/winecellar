@@ -70,6 +70,27 @@ def createWine(request):
     else:
         form = WineForm()
     return render(request, 'wine/create_form.html', {'form': form})
+    from .forms import WineForm
+from .models import Wine
+
+@login_required
+def createWine(request):
+    # Krok 1: dane z sesji od AI
+    ai_data = request.session.pop('ai_wine_data', None)
+
+    if request.method == 'POST':
+        form = WineForm(request.POST)
+        if form.is_valid():
+            wine = form.save(commit=False)
+            wine.owner = request.user
+            wine.save()
+            return redirect('/wine')
+    else:
+        # Krok 2: jeśli GET — pokaż formularz, być może z danymi z AI
+        form = WineForm(initial=ai_data if ai_data else None)
+
+    return render(request, 'wine/create_form.html', {'form': form})
+
 
 @login_required
 def updateWine(request, pk):
