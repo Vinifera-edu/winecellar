@@ -5,6 +5,13 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from datetime import datetime
 
+from django.db import models
+from django.contrib.auth.models import User
+
+class Wine(models.Model):
+    # ... inne pola
+    wine_image = models.ImageField(upload_to='wine_images/', null=True, blank=True)
+
 COUNTRY = [
     ('-', '-'),
     ('Australia', 'Australia'),
