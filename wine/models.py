@@ -7,27 +7,28 @@ from datetime import datetime
 
 COUNTRY = [
     ('-', '-'),
-    ('Australien', 'Australien'),
-    ('Frankreich', 'Frankreich'),
-    ('Deutschland', 'Deutschland'),
-    ('Italien', 'Italien'),
-    ('Österreich', 'Österreich'),
+    ('Australia', 'Australia'),
+    ('France', 'France'),
+    ('Germany', 'Germany'),
+    ('Italy', 'Italy'),
+    ('Austria', 'Austria'),
     ('Portugal', 'Portugal'),
-    ('Schweiz', 'Schweiz'),
-    ('Spanien', 'Spanien'),
-    ('Südafrika', 'Südafrika'),
+    ('Switzerland', 'Switzerland'),
+    ('Spain', 'Spain'),
+    ('South Africa', 'South Africa'),
     ('USA', 'USA'),
 ]
 
 WINETYPE = {
     "-": "-",
-    "red": "Rot",
-    "white": "Weiss",
+    "red": "Red",
+    "white": "White",
     "rose": "Rosé",
-    "bubbles": "Bubbles",
-    "sweet": "Süsswein",
-    "spirit": "Spirituosen",
+    "bubbles": "Sparkling",
+    "sweet": "Sweet",
+    "spirit": "Spirit",
 }
+
 
 class Wine(models.Model):
     owner = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -65,21 +66,22 @@ class WineForm(ModelForm):
         fields = ['winename', 'producer', 'country', 'region', 'year', 'winetype', 'grapes', 'purchase', 'dealer',
                   'price', 'drinkfrom', 'drinkto', 'warehouse', 'notes', 'nmbrbottles']
         labels = {
-            'winename': 'Weinname',
-            'producer': 'Produzent',
-            'winetype': 'Weintyp',
-            'grapes': 'Trauben',
-            'year': 'Jahrgang',
-            'country': 'Land',
-            'region': 'Region',
-            'purchase': 'Kaufdatum',
-            'price': 'Preis (~CHF)',
-            'dealer': 'Verkäufer',
-            'drinkfrom': 'Trinkbar ab',
-            'drinkto': 'Trinkbar bis',
-            'warehouse': 'Lagerort',
-            'nmbrbottles': 'Anzahl Flaschen',
-            }
+        'winename': 'Wine name',
+        'producer': 'Producer',
+        'winetype': 'Wine type',
+        'grapes': 'Grapes',
+        'year': 'Vintage',
+        'country': 'Country',
+        'region': 'Region',
+        'purchase': 'Purchase date',
+        'price': 'Price (~CHF)',
+        'dealer': 'Merchant',
+        'drinkfrom': 'Drinkable from',
+        'drinkto': 'Drinkable until',
+        'warehouse': 'Storage location',
+        'nmbrbottles': 'Number of bottles',
+    }
+
 
         widgets = {
             'winename': forms.TextInput(attrs={'class': "form-control"}),
