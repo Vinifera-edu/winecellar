@@ -164,6 +164,7 @@ def analyze_wine_image(request):
     if request.method == 'POST' and request.FILES.get('wine_image'):
         image_file = request.FILES['wine_image']
         image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
+
         response = openai.ChatCompletion.create(
             model="gpt-4-vision-preview",
             messages=[
@@ -174,7 +175,13 @@ def analyze_wine_image(request):
             ],
             max_tokens=1000
         )
+
         text = response.choices[0].message['content']
         request.session['ai_wine_data'] = text
-        return redirect('wine:create_wine')
+
+        return render(request, 'wine/analyze_image.html', {
+            'ai_result': text
+        })
+
     return render(request, 'wine/analyze_image.html')
+
