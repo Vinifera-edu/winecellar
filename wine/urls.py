@@ -5,14 +5,7 @@ from .views import create_admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = [
-    # ... Twoje ścieżki
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# App Namespace for app 'wine'
+# App Namespace
 app_name = 'wine'
 
 urlpatterns = [
@@ -31,6 +24,8 @@ urlpatterns = [
     path('wine/detail/<int:pk>', views.WineLogDetail, name='wine_log_detail'),
     path('create-admin/', create_admin),
     path('wine/analyze/', views.analyze_wine_image, name='analyze_wine_image'),
-
-    # path('charts/', views.EditorChartView.as_view(), name='charts')
 ]
+
+# Obsługa mediów w trybie DEBUG
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
